@@ -1,0 +1,67 @@
+﻿@page "/EditDeleteClass"
+@inject HttpClient Http
+
+<PageTitle>Edit / Delete Classes </PageTitle>
+
+<h1>Edit & Delete Classes</h1>
+
+<form>
+    <label for="fname"> Course Name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <label for="lname">Teachers Name:</label><br>
+    <input type="text" id="lname" name="lname">
+    <label for="lname">Module Name:</label><br>
+    <input type="text" id="lname" name="lname">
+    <label for="lname">Day of The Week:</label><br>
+    <input type="text" id="lname" name="lname">
+    <label for="lname">Room Number:</label><br>
+    <input type="text" id="lname" name="lname">
+    <label for="lname">Module Number:</label><br>
+    <input type="text" id="lname" name="lname">
+</form>
+
+<head>
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+            .button1:hover {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+
+            .button2:hover {
+                background-color: grey;
+                color: white;
+            }
+
+    </style>
+</head>
+<body>
+
+    <button class="EditButton">Edit</button>
+    <button class="DeleteButton">Delete</button>
+
+</body>

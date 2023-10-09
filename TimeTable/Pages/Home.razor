@@ -1,0 +1,120 @@
+﻿@page "/"
+@inject HttpClient Http
+<PageTitle>Home Page</PageTitle>
+
+<h1>Welcome to ARU's Class Finder'</h1>
+
+<html lang="en">
+<table class="table">
+    <thread> 
+        <tr>
+        </tr>
+    </thread>
+</table>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Calendar</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <h1>October 2023</h1>
+    <table>
+        @*Horizontal - Days*@
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
+            </tr>
+        </thead>
+        @*Vertical - Times - Each <TR> creates a new line, <TH> makes it a heading*@
+        <tbody>
+            <tr>
+                <th>09:00</th>
+            </tr>
+            <tr>
+                <th>10:00</th>
+            </tr>
+            <tr>
+                <th>11:00</th>
+            </tr>
+            <tr>
+                <th>12:00</th>
+            </tr>
+            <tr>
+                <th>13:00</th>
+            </tr>
+            <tr>
+                <th>14:00</th>
+            </tr>
+            <tr>
+                <th>15:00</th>
+            </tr>
+            <tr>
+                <th>16:00</th>
+            </tr>
+            <tr>
+                <th>17:00</th>
+            </tr>
+         @*   @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                    <td>@forecast.Summary</td>
+                    <td>@forecast.Summary</td>
+                    <td>@forecast.Summary</td>
+
+                </tr>
+            }*@
+        </tbody>
+    </table>
+</body>
+</html>
+
+@code {
+    //private WeatherForecast[]? forecasts;
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+    //}
+
+    //public class WeatherForecast
+    //{
+    //    public DateTime Date { get; set; }
+
+    //    public int TemperatureC { get; set; }
+
+    //    public string? Summary { get; set; }
+
+    //    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    //}
+}
