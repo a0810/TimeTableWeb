@@ -37,6 +37,7 @@ namespace TimeTable
             string updatedJson = JsonConvert.SerializeObject(existingJson, Formatting.Indented);
             File.WriteAllText(doc, updatedJson);
         }
+
         public void UpdateLecture(string CourseName, string ModuleCode, string ModuleName, string LecturerName, int RoomNumber, string DayOfTheWeek, DateTime StartTime, DateTime EndTime, string ID)
         {
             string jsonText = File.ReadAllText(doc);
@@ -59,6 +60,28 @@ namespace TimeTable
             }
 
             string updatedJson = JsonConvert.SerializeObject(existingJson, Formatting.Indented);
+              File.WriteAllText(doc, updatedJson);
+}
+
+        void DeleteLecture(string ID)
+        {
+            string jsonText = File.ReadAllText(doc);
+            List<Lecture>? existingJson = JsonConvert.DeserializeObject<List<Lecture>>(jsonText);
+            int count = -1;
+            foreach (Lecture json in existingJson)
+            {
+                count++;
+
+                if (json.ID == ID)
+                {
+                    existingJson.RemoveAt(count);
+                    break;
+
+                }
+            }
+
+            string updatedJson = JsonConvert.SerializeObject(existingJson,Formatting.Indented);
+
             File.WriteAllText(doc, updatedJson);
 
         }
