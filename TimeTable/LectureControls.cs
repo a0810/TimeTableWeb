@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text.Json;
 using TimeTable.Models;
 using static TimeTable.Pages.FetchData;
@@ -37,6 +38,31 @@ namespace TimeTable
             File.WriteAllText(doc, updatedJson);
         }
 
+        public void UpdateLecture(string CourseName, string ModuleCode, string ModuleName, string LecturerName, int RoomNumber, string DayOfTheWeek, DateTime StartTime, DateTime EndTime, string ID)
+        {
+            string jsonText = File.ReadAllText(doc);
+            List<Lecture>? existingJson = JsonConvert.DeserializeObject<List<Lecture>>(jsonText);
+
+            foreach (Lecture json in existingJson)
+            {
+
+                if (json.ID == ID)
+                {
+                    json.courseName = CourseName;
+                    json.moduleCode = ModuleCode;
+                    json.moduleName = ModuleName;
+                    json.roomNumber = RoomNumber;
+                    json.dayOfTheWeek = DayOfTheWeek;
+                    json.startTime = StartTime;
+                    json.endTime = EndTime;
+                    json.ID = ID;
+                }
+            }
+
+            string updatedJson = JsonConvert.SerializeObject(existingJson, Formatting.Indented);
+              File.WriteAllText(doc, updatedJson);
+}
+
         void DeleteLecture(string ID)
         {
             string jsonText = File.ReadAllText(doc);
@@ -55,6 +81,7 @@ namespace TimeTable
             }
 
             string updatedJson = JsonConvert.SerializeObject(existingJson,Formatting.Indented);
+
             File.WriteAllText(doc, updatedJson);
 
         }
