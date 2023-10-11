@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Net.Http.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
 using TimeTable.Models;
@@ -6,9 +7,9 @@ using TimeTable.Models;
 namespace TimeTable
 {
     public class LectureControls
-    { 
+    {
         string doc = "Lecture.json";
-        public void AddLecture(string CourseName,string ModuleCode, string ModuleName, string LecturerName, int RoomNumber, string DayOfTheWeek, DateTime StartTime, DateTime EndTime, string ID)
+        public void AddLecture(string CourseName,string ModuleCode, string ModuleName, string LecturerName, int RoomNumber, string DayOfTheWeek, DateTime StartTime, DateTime EndTime, string id)
         {
            
             //get data __ user input 
@@ -22,8 +23,9 @@ namespace TimeTable
                 dayOfTheWeek = DayOfTheWeek,
                 startTime = StartTime,
                 endTime = EndTime,
-                ID = ID
+                ID = id
             };
+            
             // get all data from json 
             List<Lecture> existingJson = new List<Lecture>();
             if (File.Exists(doc))
@@ -32,7 +34,7 @@ namespace TimeTable
                 existingJson = JsonConvert.DeserializeObject<List<Lecture>>(jsonText);
             }
             //add new data and write back to json
-            existingJson.Add(lecture);
+             existingJson.Add(lecture);
             string updatedJson = JsonConvert.SerializeObject(existingJson, Formatting.Indented);
             File.WriteAllText(doc, updatedJson);
         }
@@ -103,17 +105,6 @@ namespace TimeTable
         
             return result;
         }
-    
-
-        /// <summary>
-        /// calling this method will create a new GUID and convert it into a string so that i can be used as a unique identifier 
-        /// </summary>
-        /// <returns>a string GUID</returns>
-        public string NewID()
-        {
-            return Guid.NewGuid().ToString();
-
-
-        }
+  
     }
 }
