@@ -1,16 +1,13 @@
 ﻿@page "/"
+@using TimeTable.Models
 @inject HttpClient Http
 <PageTitle>Home Page</PageTitle>
 
 <h1>Welcome to ARU's Class Finder'</h1>
 
 <html lang="en">
-<table class="table">
-    <thread> 
-        <tr>
-        </tr>
-    </thread>
-</table>
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,84 +34,404 @@
     </style>
 </head>
 <body>
+@if (_display == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
     <h1>October 2023</h1>
     <table>
         @*Horizontal - Days*@
         <thead>
-            <tr>
-                <th>Time</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-                <th>Sun</th>
-            </tr>
+        <tr>
+            <th>Time</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+        </tr>
         </thead>
         @*Vertical - Times - Each <TR> creates a new line, <TH> makes it a heading*@
         <tbody>
-            <tr>
-                <th>09:00</th>
-            </tr>
-            <tr>
-                <th>10:00</th>
-            </tr>
-            <tr>
-                <th>11:00</th>
-            </tr>
-            <tr>
-                <th>12:00</th>
-            </tr>
-            <tr>
-                <th>13:00</th>
-            </tr>
-            <tr>
-                <th>14:00</th>
-            </tr>
-            <tr>
-                <th>15:00</th>
-            </tr>
-            <tr>
-                <th>16:00</th>
-            </tr>
-            <tr>
-                <th>17:00</th>
-            </tr>
-         @*   @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                    <td>@forecast.Summary</td>
-                    <td>@forecast.Summary</td>
-                    <td>@forecast.Summary</td>
+        <tr>
+            <th>09:00</th>
 
-                </tr>
-            }*@
+
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 0;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+
+
+        </tr>
+        <tr>
+            <th>10:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 1;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+
+        </tr>
+        <tr>
+            <th>11:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 2;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>12:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 3;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>13:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 4;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>14:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 5;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>15:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 6;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>16:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 7;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>17:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                var dayOfWeek = ReOrderDayOfWeek(day);
+                var TimeSlot = 8;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (var foo in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @foo.courseName <br/>
+                                        @foo.moduleName <br/>
+                                        @foo.roomNumber <br/>
+                                        @foo.startTime.ToShortTimeString() - @foo.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
         </tbody>
     </table>
+}
+
 </body>
 </html>
 
 @code {
-    //private WeatherForecast[]? forecasts;
+    private Lecture[]? lectures;
+    private readonly TimeSpan NINE_OCLOCK = new(9, 0, 0);
+    private readonly TimeSpan TEN_OCLOCK = new(10, 0, 0);
+    private readonly TimeSpan ELEVEN_OCLOCK = new(11, 0, 0);
+    private readonly TimeSpan TWELVE_OCLOCK = new(12, 0, 0);
+    private readonly TimeSpan ONE_OCLOCK = new(13, 0, 0);
+    private readonly TimeSpan TWO_OCLOCK = new(14, 0, 0);
+    private readonly TimeSpan THREE_OCLOCK = new(15, 0, 0);
+    private readonly TimeSpan FORE_OCLOCK = new(16, 0, 0);
+    private readonly TimeSpan FIVE_OCLOCK = new(17, 0, 0);
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-    //}
+    private List<Lecture>[,] _display;
+        private const int NUM_OF_DAYS = 7;
+        private const int NUM_OF_HOUR_SLOTS = 9;
+    
 
-    //public class WeatherForecast
-    //{
-    //    public DateTime Date { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        lectures = await Http.GetFromJsonAsync<Lecture[]>("sample-data/Lecture.json");
+        _display = new List<Lecture>[NUM_OF_HOUR_SLOTS, NUM_OF_DAYS];
 
-    //    public int TemperatureC { get; set; }
+        for (var x = 0; x < NUM_OF_HOUR_SLOTS; x++)
+            for (var y = 0; y < NUM_OF_DAYS; y++)
+                _display[x, y] = new List<Lecture>();
 
-    //    public string? Summary { get; set; }
+        if (lectures is not null)
+        {
+            foreach (var lecture in lectures)
+            {
+                switch (lecture.startTime.DayOfWeek)
+                {
+                    case DayOfWeek.Monday:
+                        PopulateDisplayAid(lecture, 0);
+                        break;
 
-    //    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    //}
+                    case DayOfWeek.Tuesday:
+                        PopulateDisplayAid(lecture, 1);
+                        break;
+
+                    case DayOfWeek.Wednesday:
+                        PopulateDisplayAid(lecture, 2);
+                        break;
+
+                    case DayOfWeek.Thursday:
+                        PopulateDisplayAid(lecture, 3);
+                        break;
+
+                    case DayOfWeek.Friday:
+                        PopulateDisplayAid(lecture, 4);
+                        break;
+
+                    case DayOfWeek.Saturday:
+                        PopulateDisplayAid(lecture, 5);
+                        break;
+
+                    case DayOfWeek.Sunday:
+                        PopulateDisplayAid(lecture, 6);
+                        break;
+                }
+            }
+        }
+    }
+
+    private void PopulateDisplayAid(Lecture lecture, int DayOfWeek)
+    {
+        
+        if (lecture.startTime.TimeOfDay >= NINE_OCLOCK && lecture.startTime.TimeOfDay < TEN_OCLOCK)
+        {
+            _display[0, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= TEN_OCLOCK && lecture.startTime.TimeOfDay < ELEVEN_OCLOCK)
+        {
+            _display[1, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= ELEVEN_OCLOCK && lecture.startTime.TimeOfDay < TWELVE_OCLOCK)
+        {
+            _display[2, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= TWELVE_OCLOCK && lecture.startTime.TimeOfDay < ONE_OCLOCK)
+        {
+            _display[3, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= ONE_OCLOCK && lecture.startTime.TimeOfDay < TWO_OCLOCK)
+        {
+            _display[4, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= TWO_OCLOCK && lecture.startTime.TimeOfDay < THREE_OCLOCK)
+        {
+            _display[5, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= THREE_OCLOCK && lecture.startTime.TimeOfDay < FORE_OCLOCK)
+        {
+            _display[6, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= FORE_OCLOCK && lecture.startTime.TimeOfDay < FIVE_OCLOCK)
+        {
+            _display[7, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= FIVE_OCLOCK)
+        {
+            _display[8, DayOfWeek].Add(lecture);
+        }
+    }
+
+    private static int ReOrderDayOfWeek(DayOfWeek day)
+    {
+        var dayOfWeek = day switch
+        {
+            DayOfWeek.Sunday => 6,
+            DayOfWeek.Monday => 0,
+            DayOfWeek.Tuesday => 1,
+            DayOfWeek.Wednesday => 2,
+            DayOfWeek.Thursday => 3,
+            DayOfWeek.Friday => 4,
+            DayOfWeek.Saturday => 5
+            };
+        return dayOfWeek;
+    }
+
 }
