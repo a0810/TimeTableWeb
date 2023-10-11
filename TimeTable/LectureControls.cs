@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
 using TimeTable.Models;
-using static TimeTable.Pages.FetchData;
+
 
 namespace TimeTable
 {
